@@ -1,11 +1,13 @@
 import React from 'react';
 import ProFastLogo from '../ProFastLogo/ProFastLogo';
+import { NavLink } from 'react-router';
 
 const Navbar = () => {
 
     const navItems = <>
-    <li><navItems to="/">Home</navItems></li>                        
-    <li><navItems to="/about">About Us</navItems></li>                        
+    <li><NavLink to="/">Home</NavLink></li>                        
+    <li><NavLink to="/coverage">Coverage</NavLink></li>   
+    <li><NavLink to="/about">About Us</NavLink></li>                        
    
     </>
     return (
