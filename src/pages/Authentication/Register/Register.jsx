@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
+import { Link } from 'react-router';
 
 const Register = () => {
     const {register, handleSubmit, formState: {errors}}= useForm();
@@ -51,8 +52,9 @@ const Register = () => {
                         className='text-red-500'>Password must be 6 characters or longer.
                         </p>
                     }
-                    <button className="btn btn-neutral mt-4">Register</button>
+                    <button className="btn btn-primary text-black mt-4">Register</button>
                 </fieldset>
+                <p><small>Already have an account? <Link className="btn btn-link" to="/login">Login</Link></small></p>
                 </form>
             </div>
 
