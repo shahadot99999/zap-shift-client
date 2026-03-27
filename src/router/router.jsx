@@ -6,6 +6,8 @@ import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Authentication/Login/Login";
 import Register from "../pages/Authentication/Register/Register";
 import Coverage from "../pages/Coverage/Coverage";
+import SendParcel from "../pages/SendParcel/SendParcel";
+import ProvateRoute from "./routes/ProvateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +22,10 @@ export const router = createBrowserRouter([
         path: 'coverage',
         Component: Coverage,
         loader: ()=>fetch('./../../public/data/warehouses.json')
+      },
+      {
+        path: 'sendParcel',
+        element: <ProvateRoute><SendParcel></SendParcel></ProvateRoute>
       }
     ]
   },
