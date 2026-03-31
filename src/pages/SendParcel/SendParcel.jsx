@@ -1,13 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { useLoaderData } from 'react-router';
 
-const serviceCenters = [
-  { id: 1, district: "Dhaka", center: "Dhanmondi Hub" },
-  { id: 2, district: "Dhaka", center: "Mirpur Hub" },
-  { id: 3, district: "Khulna", center: "Khulna Sadar Hub" },
-  { id: 4, district: "Chittagong", center: "Agrabad Hub" },
-];
+
 
 const SendParcel = () => {
   const {
@@ -17,6 +13,8 @@ const SendParcel = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+  const serviceCenters = useLoaderData();
 
   const parcelType = watch("type");
 
@@ -109,10 +107,11 @@ const SendParcel = () => {
               <option value="non-document">Non-Document</option>
             </select>
 
+            {/* ✅ Updated Title → Parcel Name */}
             <input
               className="input input-bordered w-full"
-              placeholder="Title"
-              {...register("title", { required: true })}
+              placeholder="Describe your parcel..."
+              {...register("parcelName", { required: true })}
             />
 
             {parcelType === "non-document" && (
@@ -133,7 +132,8 @@ const SendParcel = () => {
           <div className="card bg-base-100 shadow-md p-5">
             <h2 className="text-xl font-semibold mb-4">Sender Info</h2>
 
-            <div className="grid gap-4">
+            {/* ✅ Forced single column */}
+            <div className="flex flex-col gap-4">
               <input
                 className="input input-bordered"
                 defaultValue="Logged User"
@@ -146,7 +146,6 @@ const SendParcel = () => {
                 {...register("senderContact", { required: true })}
               />
 
-              {/* Region */}
               <select
                 className="select select-bordered"
                 {...register("senderRegion", { required: true })}
@@ -157,14 +156,13 @@ const SendParcel = () => {
                 ))}
               </select>
 
-              {/* Service Center */}
               <select
                 className="select select-bordered"
-                {...register("senderServiceCenter", { required: true })}
+                {...register("senderRegion", { required: true })}
               >
                 <option value="">Select Service Center</option>
-                {senderCenters.map((center) => (
-                  <option key={center.id}>{center.center}</option>
+                {regions.map((region) => (
+                  <option key={region}>{region}</option>
                 ))}
               </select>
 
@@ -186,7 +184,8 @@ const SendParcel = () => {
           <div className="card bg-base-100 shadow-md p-5">
             <h2 className="text-xl font-semibold mb-4">Receiver Info</h2>
 
-            <div className="grid gap-4">
+            {/* ✅ Forced single column */}
+            <div className="flex flex-col gap-4">
               <input
                 className="input input-bordered"
                 placeholder="Name"
@@ -199,7 +198,6 @@ const SendParcel = () => {
                 {...register("receiverContact", { required: true })}
               />
 
-              {/* Region */}
               <select
                 className="select select-bordered"
                 {...register("receiverRegion", { required: true })}
@@ -210,14 +208,13 @@ const SendParcel = () => {
                 ))}
               </select>
 
-              {/* Service Center */}
               <select
                 className="select select-bordered"
-                {...register("receiverServiceCenter", { required: true })}
+                {...register("receiverRegion", { required: true })}
               >
                 <option value="">Select Service Center</option>
-                {receiverCenters.map((center) => (
-                  <option key={center.id}>{center.center}</option>
+                {regions.map((region) => (
+                  <option key={region}>{region}</option>
                 ))}
               </select>
 
@@ -237,7 +234,7 @@ const SendParcel = () => {
 
         </div>
 
-        <button className="btn btn-primary w-full">
+        <button className="btn btn-primary  text-black">
           Submit Parcel
         </button>
       </form>
